@@ -16,7 +16,7 @@ public class IntArray {
 	}
 
 	public void add(int x) {
-		if (index > arr.length) {
+		if (index >= arr.length) {
 			resize();
 		}
 		arr[index++] = x;
