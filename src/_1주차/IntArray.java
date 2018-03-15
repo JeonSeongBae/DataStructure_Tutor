@@ -23,14 +23,13 @@ public class IntArray {
 	}
 
 	private void resize() {
-		int[] temp = new int[arr.length];
-		System.arraycopy(arr, 0, temp, 0, arr.length);
+		int[] temp = arr;
 		arr = new int[arr.length * 2];
 		System.arraycopy(temp, 0, arr, 0, temp.length);
 	}
 
 	public void remove(int x) {
-		for (int i = 0; i < index; i++) {
+		for (int i = 0; i <= index; i++) {
 			if (arr[i] == x) {
 				System.arraycopy(arr, i + 1, arr, i, arr.length - i - 1);
 				index--;
