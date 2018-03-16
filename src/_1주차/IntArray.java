@@ -43,5 +43,4 @@ public class IntArray {
 			System.out.print(arr[i] + " ");
 		}
 	}
-
 }
