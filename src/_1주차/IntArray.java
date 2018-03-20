@@ -38,7 +38,7 @@ public class IntArray {
 	}
 
 	public void print() {
-		System.out.println("배열 데이터 : ");
+		System.out.print("배열 데이터 : ");
 		for (int i = 0; i < index; i++) {
 			System.out.print(arr[i] + " ");
 		}
