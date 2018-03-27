@@ -1,58 +1,61 @@
 package _3주차;
 
 public class LinkedList {
-	Node start;
+	Node startNode;
 
 	public LinkedList() {
-		this.start = null;
+		this.startNode = null;
 	}
 
 	public void insertlast(int x) {
-		if (start == null) {
-			start = new Node(x, null);
+		if (startNode == null) {
+			emptyNode(x);
 		} else {
-			Node p = start;
-			while (p.next != null) {
-				p = p.next;
+			Node p = startNode;
+			while (p.getNext() != null) {
+				p = p.getNext();
 			}
-			p.next = new Node(x, null);
+			p.setNext(new Node(x));
 		}
 
 	}
 
 	public void insertfirst(int x) {
-		if (start == null) {
-			start = new Node(x, null);
+		if (startNode == null) {
+			emptyNode(x);
 		} else {
-			Node p = start;
-			start = new Node(x, p);
+			startNode = new Node(x, startNode);
 		}
 	}
 
+	private void emptyNode(int x) {
+		startNode = new Node(x);
+	}
+
 	public boolean contain(int x) {
-		if (start == null) {
+		if (startNode == null) {
 			return false;
 		}
-		Node p = start;
-		if (p.value == x) {
+		Node p = startNode;
+		if (p.getValue() == x) {
 			return true;
 		}
-		while (p.next != null) {
-			if (p.next.value == x) {
+		while (p.getNext() != null) {
+			if (p.getNext().getValue() == x) {
 				return true;
 			}
-			p = p.next;
+			p = p.getNext();
 		}
 		return false;
 	}
 
 	public void print() {
-		Node p = start;
+		Node p = startNode;
 		System.out.print("List : ");
-		while (p.next != null) {
-			System.out.print(p.value + " ");
-			p = p.next;
+		while (p.getNext() != null) {
+			System.out.print(p.getValue() + " ");
+			p = p.getNext();
 		}
-		System.out.println(p.value);
+		System.out.println(p.getValue());
 	}
 }

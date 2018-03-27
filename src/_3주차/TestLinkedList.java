@@ -4,20 +4,22 @@ public class TestLinkedList {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		LinkedList linkedlist = new LinkedList();
+		LinkedList list1 = new LinkedList();
 		for (int i = 1; i <= 10; i++) {
-			linkedlist.insertfirst(i);
+			list1.insertfirst(i);
 		}
-
-		linkedlist.print();
-		System.out.println(linkedlist.contain(5));
-		System.out.println(linkedlist.contain(20));
-
+		list1.print();
+		System.out.println(list1.contain(5));
+		System.out.println(list1.contain(20));
+		
+		LinkedList list2 = new LinkedList();
 		for (int i = 1; i <= 10; i++) {
-			linkedlist.insertlast(i);
-			System.out.println(i);
+			list2.insertlast(i);
 		}
-		linkedlist.print();
+		list2.print();
+
+		System.out.println(list1.contain(5));
+		System.out.println(list1.contain(20));
 
 	}
 
