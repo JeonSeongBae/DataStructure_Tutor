@@ -26,6 +26,7 @@ public class BigInt {
 
 	}
 
+	@Override
 	public String toString() {
 		StringBuffer buf = new StringBuffer(Integer.toString(start.digit));
 		Node p = start.next;
