@@ -78,29 +78,41 @@ public class LinkedList {
 	public void reverse() {
 		if (start == null) {
 			throw new IllegalArgumentException("start == null");
-		} else {
-			Node p = null;
-			while (start.next != null) {
-				p = new Node(start.value, p);
-				start = start.next;
-			}
-			start = new Node(start.value, p);
 		}
+		Node p = start;
+		start = start.next;
+		Node q = start.next;
+		p.next = null;
+		while (q != null) {
+			start.next = p;
+			p = start;
+			start = q;
+			q = start.next;
+		}
+		start.next = p;
 	}
 
 	public Node removesecond() {
 		if (start == null) {
 			throw new IllegalArgumentException("start == null");
-		} else if (start.next == null) {
-			throw new IllegalArgumentException("start.next == null");
-		} else {
-			Node p = start.next;
-			start.next = start.next.next;
-			return p;
 		}
+		if (start.next == null) {
+			throw new IllegalArgumentException("start.next == null");
+		}
+		Node p = start.getNext();
+		start.setNext(start.getNext().getNext());
+		return p;
 	}
 
 	public void reverse_out() {
-		Node p = start;
+		if (start == null) {
+			throw new IllegalArgumentException("start == null");
+		}
+		Node p = null;
+		while (start != null) {
+			p = new Node(start.getValue(), p);
+			start = start.getNext();
+		}
+		start = p;
 	}
 }
