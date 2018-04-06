@@ -64,27 +64,43 @@ public class LinkedList {
 		}
 	}
 
-	public void print() {
+	@Override
+	public String toString() {
 		Node p = start;
 		System.out.print("List : ");
 		while (p.getNext() != null) {
 			System.out.print(p.getValue() + " ");
 			p = p.getNext();
 		}
-		System.out.println(p.getValue());
+		return String.valueOf(p.getValue());
 	}
 
 	public void reverse() {
-		Node p = new Node(start.value, null);
-		start = start.next;
-		while (start != null) {
-			p = new Node(start.value, p);
-			start = start.next;
+		if (start == null) {
+			throw new IllegalArgumentException("start == null");
+		} else {
+			Node p = null;
+			while (start.next != null) {
+				p = new Node(start.value, p);
+				start = start.next;
+			}
+			start = new Node(start.value, p);
 		}
-		start = p;
 	}
 
-	public void removesecond() {
+	public Node removesecond() {
+		if (start == null) {
+			throw new IllegalArgumentException("start == null");
+		} else if (start.next == null) {
+			throw new IllegalArgumentException("start.next == null");
+		} else {
+			Node p = start.next;
+			start.next = start.next.next;
+			return p;
+		}
+	}
 
+	public void reverse_out() {
+		Node p = start;
 	}
 }
