@@ -11,6 +11,7 @@ public class TestLinkedList {
 		list.print();
 		list.reverse();
 		list.print();
+		
 		list.removesecond();
 	}
 
