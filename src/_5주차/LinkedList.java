@@ -7,11 +7,6 @@ public class LinkedList {
 		private int value;
 		private Node next;
 
-		public Node() {
-			this.value = -1;
-			this.next = null;
-		}
-
 		public Node(int x) {
 			this.value = x;
 			this.next = null;
@@ -80,14 +75,14 @@ public class LinkedList {
 			throw new IllegalArgumentException("start == null");
 		}
 		Node p = start;
-		start = start.next;
-		Node q = start.next;
+		start = start.getNext();
+		Node q = start.getNext();
 		p.next = null;
 		while (q != null) {
-			start.next = p;
+			start.setNext(p);
 			p = start;
 			start = q;
-			q = start.next;
+			q = start.getNext();
 		}
 		start.next = p;
 	}
@@ -96,7 +91,7 @@ public class LinkedList {
 		if (start == null) {
 			throw new IllegalArgumentException("start == null");
 		}
-		if (start.next == null) {
+		if (start.getNext() == null) {
 			throw new IllegalArgumentException("start.next == null");
 		}
 		Node p = start.getNext();
