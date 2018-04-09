@@ -5,12 +5,29 @@ public class BigInt {
 	private Node start;
 
 	private static class Node {
-		int digit;
-		Node next;
+		private int digit;
+		private Node next;
 
-		Node(int digit) {
+		public Node(int digit) {
 			this.digit = digit;
 		}
+
+		public int getDigit() {
+			return digit;
+		}
+
+		public void setDigit(int digit) {
+			this.digit = digit;
+		}
+
+		public Node getNext() {
+			return next;
+		}
+
+		public void setNext(Node next) {
+			this.next = next;
+		}
+
 	}
 
 	public BigInt(int n) {
@@ -20,52 +37,41 @@ public class BigInt {
 		Node p = start;
 		n /= 10;
 		while (n > 0) {
-			p = p.next = new Node(n % 10);
+			p.setNext(new Node(n % 10));
+			p = p.getNext();
 			n /= 10;
 		}
-
-	}
-
-	@Override
-	public String toString() {
-		StringBuffer buf = new StringBuffer(Integer.toString(start.digit));
-		Node p = start.next;
-		while (p != null) {
-			buf.insert(0, Integer.toString(p.digit));
-			p = p.next;
-		}
-		return buf.toString();
 	}
 
 	public BigInt plus(BigInt y) {
 		Node p = start;
 		Node q = y.start;
-		int n = p.digit + q.digit;
+		int n = p.getDigit() + q.getDigit();
 		BigInt z = new BigInt(n % 10);
 		Node r = z.start;
-		p = p.next;
-		q = q.next;
+		p = p.getNext();
+		q = q.getNext();
 		while (p != null && q != null) {
-			n = n / 10 + p.digit + q.digit;
-			r.next = new Node(n % 10);
-			p = p.next;
-			q = q.next;
-			r = r.next;
+			n = n / 10 + p.getDigit() + q.getDigit();
+			r.setNext(new Node(n % 10));
+			p = p.getNext();
+			q = q.getNext();
+			r = r.getNext();
 		}
 		while (p != null) {
-			n = n / 10 + p.digit;
-			r.next = new Node(n % 10);
-			p = p.next;
-			r = r.next;
+			n = n / 10 + p.getDigit();
+			r.setNext(new Node(n % 10));
+			p = p.getNext();
+			r = r.getNext();
 		}
 		while (q != null) {
-			n = n / 10 + q.digit;
-			r.next = new Node(n % 10);
-			q = q.next;
-			r = r.next;
+			n = n / 10 + q.getDigit();
+			r.setNext(new Node(n % 10));
+			q = q.getNext();
+			r = r.getNext();
 		}
 		if (n > 9)
-			r.next = new Node(n / 10);
+			r.setNext(new Node(n / 10));
 		return z;
 	}
 
@@ -76,18 +82,18 @@ public class BigInt {
 		// y는 한자리 수
 		Node p = this.start;
 		Node q = y.start;
-		int n = p.digit * q.digit;
+		int n = p.getDigit() * q.getDigit();
 		BigInt z = new BigInt(n % 10);
 		Node r = z.start;
-		p = p.next;
+		p = p.getNext();
 		while (p != null) {
-			n = n / 10 + (p.digit * q.digit);
-			r.next = new Node(n % 10);
-			p = p.next;
-			r = r.next;
+			n = n / 10 + (p.getDigit() * q.getDigit());
+			r.setNext(new Node(n % 10));
+			p = p.getNext();
+			r = r.getNext();
 		}
 		if (n > 9)
-			r.next = new Node(n / 10);
+			r.setNext(new Node(n / 10));
 		return z;
 
 	}
@@ -97,20 +103,31 @@ public class BigInt {
 	 */
 	public BigInt multiply(BigInt y) {
 		Node q = y.start;
-		BigInt result = this.multiplyone(new BigInt(q.digit));
-		q = q.next;
+		BigInt result = this.multiplyone(new BigInt(q.getDigit()));
+		q = q.getNext();
 		int count = 1;
 		while (q != null) {
-			BigInt sum = this.multiplyone(new BigInt(q.digit));
+			BigInt sum = this.multiplyone(new BigInt(q.getDigit()));
 			// 자릿수를 맞춰주기위해 10을 곱해준다. x * 10 == (x * 9) + x
 			for (int i = 0; i < count; i++) {
 				BigInt temp = sum.multiplyone(new BigInt(9));
 				sum = sum.plus(temp);
 			}
 			result = result.plus(sum);
-			q = q.next;
+			q = q.getNext();
 			count++;
 		}
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer buf = new StringBuffer(Integer.toString(start.getDigit()));
+		Node p = start.getNext();
+		while (p != null) {
+			buf.insert(0, Integer.toString(p.getDigit()));
+			p = p.getNext();
+		}
+		return buf.toString();
 	}
 }
