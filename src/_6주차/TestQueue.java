@@ -12,6 +12,7 @@ public class TestQueue {
 		// TODO Auto-generated method stub
 		Queue mArrayQueue = new ArrayQueue(4);
 		System.out.println("********** Test ArrayQueue **********");
+		
 		mArrayQueue.add("DE");
 		mArrayQueue.add("PA");
 		mArrayQueue.add("NJ");
