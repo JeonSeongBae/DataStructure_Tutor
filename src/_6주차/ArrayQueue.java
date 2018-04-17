@@ -71,18 +71,19 @@ public class ArrayQueue implements Queue {
 	}
 
 	@Override
-	public void print() {
+	public String toString() {
 		// 내부 코드 구현
-		// TODO Auto-generated method stub
-		int i = 1;
-		if (queue[0] != null) {
-			System.out.print(queue[0]);
-		}
-		for (int j = 1; j < size; j++) {
-			System.out.print("<--" + queue[i]);
+		if (size == 0)
+			throw new IllegalArgumentException("Empty Queue!");
+		StringBuffer buf = new StringBuffer("* Array Queue = ");
+		if (queue[0] != null)
+			buf.append("[" + queue[0]);
+		for (int i = 1; i < size; i++) {
+			buf.append("|" + queue[i]);
 			i++;
 		}
-		System.out.println();
+		buf.append("]");
+		return buf.toString();
 	}
 
 	@Override
@@ -92,5 +93,11 @@ public class ArrayQueue implements Queue {
 		Object[] a = queue;
 		queue = new Object[queue.length * 2];
 		System.arraycopy(a, 0, queue, 0, size);
+	}
+
+	@Override
+	public void print() {
+		// TODO Auto-generated method stub
+
 	}
 }
