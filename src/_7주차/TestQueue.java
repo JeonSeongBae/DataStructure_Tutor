@@ -27,6 +27,7 @@ public class TestQueue {
 		for (int i = 10; i < 13; i++) {
 			slq.add(i);
 		}
+		System.out.println(slq);
 		System.out.println(slq.toArrayQueue());
 	}
 
