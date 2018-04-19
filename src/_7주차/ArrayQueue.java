@@ -1,33 +1,63 @@
 package _7주차;
 
 public class ArrayQueue implements Queue {
+	Object[] array;
+	int front;
+	int rear;
 
-	public ArrayQueue(int i) {
-		// TODO Auto-generated constructor stub
+	public ArrayQueue(int size) {
+		array = new Object[size];
+		this.front = -1;
+		this.rear = -1;
 	}
 
 	@Override
 	public void add(Object o) {
-		// TODO Auto-generated method stub
-		
+		if (rear == (array.length - 1)) {
+			System.out.println("Queue is full");
+		} else {
+			array[++rear] = o;
+			System.out.println("add : " + o);
+		}
 	}
 
 	@Override
 	public Object first() {
-		// TODO Auto-generated method stub
-		return null;
+		if (empty()) {
+			return null;
+		}
+		return array[front + 1];
 	}
 
 	@Override
 	public Object remove() {
-		// TODO Auto-generated method stub
-		return null;
+		Object oldObject = array[++front];
+		array[front] = null;
+		return (int) oldObject;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return rear - front;
 	}
 
+	public boolean empty() {
+		if (size() == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer buf = new StringBuffer("ArrayQueue : [ ");
+		buf.append(array[0]);
+		for (int i = 1; i < array.length; i++) {
+			buf.append(" | " + array[i]);
+		}
+		buf.append(" ]\n");
+		buf.append("( front : " + front + ", rear : " + rear+" )");
+		return buf.toString();
+	}
 }
