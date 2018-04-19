@@ -17,7 +17,6 @@ public class ArrayQueue implements Queue {
 			System.out.println("Queue is full");
 		} else {
 			array[++rear] = o;
-			System.out.println("add : " + o);
 		}
 	}
 
@@ -51,13 +50,15 @@ public class ArrayQueue implements Queue {
 
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer("ArrayQueue : [ ");
-		buf.append(array[0]);
-		for (int i = 1; i < array.length; i++) {
-			buf.append(" | " + array[i]);
+		StringBuffer buf = new StringBuffer("ArrayQueue : ");
+		if (size() != 0) {
+			buf.append("[ " + array[0]);
+			for (int i = 1; i < array.length; i++) {
+				buf.append(" | " + array[i]);
+			}
+			buf.append(" ]\n");
 		}
-		buf.append(" ]\n");
-		buf.append("( front : " + front + ", rear : " + rear+" )");
+		buf.append("( front : " + front + ", rear : " + rear + " )");
 		return buf.toString();
 	}
 }
