@@ -13,7 +13,7 @@ public class TestQueue {
 			aq.remove();
 		}
 		System.out.println(aq);
-		
+
 		/* SLinkedQueue */
 		SLinkedQueue slq = new SLinkedQueue();
 		for (int i = 6; i < 10; i++) {
