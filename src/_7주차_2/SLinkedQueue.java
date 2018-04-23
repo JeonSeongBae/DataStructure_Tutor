@@ -21,7 +21,6 @@ public class SLinkedQueue implements Queue {
 			p = p.next;
 		}
 		return buf.toString();
-
 	}
 
 	public ArrayQueue toArrayQueue() {
@@ -37,13 +36,11 @@ public class SLinkedQueue implements Queue {
 	public boolean empty() {
 		if (size == 0)
 			return true;
-		else
-			return false;
+		return false;
 	}
 
 	@Override
 	public void add(Object object) {
-		// TODO Auto-generated method stub
 		if (empty()) {
 			head = rear = new Node(object);
 		} else {
@@ -55,7 +52,6 @@ public class SLinkedQueue implements Queue {
 
 	@Override
 	public Object first() {
-		// TODO Auto-generated method stub
 		if (size == 0)
 			throw new IllegalStateException("the queue is empty");
 		return head.object;
@@ -63,7 +59,6 @@ public class SLinkedQueue implements Queue {
 
 	@Override
 	public Object remove() {
-		// TODO Auto-generated method stub
 		if (size == 0)
 			throw new IllegalStateException("the queue is empty");
 		Node temp = head;
@@ -74,8 +69,7 @@ public class SLinkedQueue implements Queue {
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return size;
+		return this.size;
 	}
 
 	private class Node {
@@ -84,11 +78,6 @@ public class SLinkedQueue implements Queue {
 
 		Node(Object object) {
 			this.object = object;
-		}
-
-		Node(Object object, Node next) {
-			this.object = object;
-			this.next = next;
 		}
 	}
 }
