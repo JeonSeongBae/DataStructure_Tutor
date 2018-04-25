@@ -3,7 +3,6 @@ package _7주차_2;
 public class TestQueue {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		ArrayQueue aq = new ArrayQueue(5);
 		for (int i = 1; i <= 5; i++) {
 			aq.add(i);
