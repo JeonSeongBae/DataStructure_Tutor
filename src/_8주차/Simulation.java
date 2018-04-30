@@ -53,6 +53,23 @@ public class Simulation {
 	}
 
 	static void run() {
-
+		int i = 0;
+		int nextArrivalTime = randomArrival.nextInt();
+		for (int t = 0; t < numClients; t++) {
+			if (t == nextArrivalTime) {
+				Client client = clients[i++] = new SimClient(i, t);
+				queue.add(client);
+				nextArrivalTime = t + randomArrival.nextInt();
+			}
+			for (int j = 0; j < numServers; j++) {
+				Server server = servers[j];
+				if (t == server.getStopTime())
+					server.stopServing(t);
+				if (server.isIdle() && !queue.empty()) {
+					Client client = (SimClient) queue.remove();
+					server.startServing(client, t);
+				}
+			}
+		}
 	}
 }
