@@ -2,7 +2,7 @@ package _9주차;
 
 import java.util.*;
 
-public class TestOrderTree {
+public class TestOrderedTree {
 
 	public static void main(String[] args) {
 		OrderedTree treeA, treeB, treeD, treeE, treeG;
