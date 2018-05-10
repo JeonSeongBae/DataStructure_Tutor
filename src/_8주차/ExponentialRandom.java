@@ -1,6 +1,10 @@
 package _8주차;
 
 public class ExponentialRandom extends java.util.Random {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 201302476;
 	private double mean;
 
 	public ExponentialRandom(double mean) {
