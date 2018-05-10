@@ -2,7 +2,7 @@ package _9주차;
 
 import java.util.*;
 
-public class TestOrderedTree {
+public class TestOrderTree {
 
 	public static void main(String[] args) {
 		OrderedTree treeA, treeB, treeD, treeE, treeG;
@@ -16,7 +16,7 @@ public class TestOrderedTree {
 		OrderedTree treeM = new OrderedTree("M");
 
 		/* TreeList 객체 생성 */
-		List subtreesOfE = (List) new LinkedList();
+		List<OrderedTree> subtreesOfE = (List<OrderedTree>) new LinkedList<OrderedTree>();
 
 		/* treeList에 treeH treeI 추가 */
 		subtreesOfE.add(treeH);
@@ -26,7 +26,7 @@ public class TestOrderedTree {
 		treeE = new OrderedTree("E", subtreesOfE);
 
 		/* TreeList 객체 생성 */
-		List subtreesOfG = (List) new LinkedList();
+		List<OrderedTree> subtreesOfG = (List<OrderedTree>) new LinkedList<OrderedTree>();
 
 		/* treeList에 treeJ treeL treeL treeM 추가 */
 		subtreesOfG.add(treeJ);
@@ -36,9 +36,9 @@ public class TestOrderedTree {
 
 		/* treeB에 연결하여 트리 구축 */
 		treeG = new OrderedTree("G", subtreesOfG);
-		
+
 		/* TreeList 객체 생성 */
-		List subtreesOfB = (List) new LinkedList();
+		List<OrderedTree> subtreesOfB = (List<OrderedTree>) new LinkedList<OrderedTree>();
 
 		/* treeList에 treeE treeF 추가 */
 		subtreesOfB.add(treeE);
@@ -48,7 +48,7 @@ public class TestOrderedTree {
 		treeB = new OrderedTree("B", subtreesOfB);
 
 		/* treeList 객체 생성 */
-		List subtreesOfD = (List) new LinkedList();
+		List<OrderedTree> subtreesOfD = (List<OrderedTree>) new LinkedList<OrderedTree>();
 
 		/* treeList에 treeG 추가 */
 		subtreesOfD.add(treeG);
@@ -57,7 +57,7 @@ public class TestOrderedTree {
 		treeD = new OrderedTree("D", subtreesOfD);
 
 		/* treeList 객체 생성 */
-		List subtreesOfA = (List) new LinkedList();
+		List<OrderedTree> subtreesOfA = (List<OrderedTree>) new LinkedList<OrderedTree>();
 
 		/* treeList에 treeB, treeC, treeD 추가 */
 		subtreesOfA.add(treeB);

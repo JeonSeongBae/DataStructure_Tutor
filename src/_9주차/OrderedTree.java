@@ -4,7 +4,7 @@ import java.util.*;
 
 public class OrderedTree {
 	private Object root;
-	private List subtrees;
+	private List<OrderedTree> subtrees;
 	private int size;
 	private SLinkedQueue queue;
 
@@ -15,13 +15,13 @@ public class OrderedTree {
 	public OrderedTree(Object root) {
 		// constructs a singleton
 		this.root = root;
-		subtrees = new LinkedList();// constructs the empty list
+		subtrees = new LinkedList<OrderedTree>();// constructs the empty list
 		size = 1;
 	}
 
-	public OrderedTree(Object root, List trees) {
+	public OrderedTree(Object root, List<?> trees) {
 		this(root);
-		for (Iterator it = trees.iterator(); it.hasNext();) {
+		for (Iterator<?> it = trees.iterator(); it.hasNext();) {
 			Object object = it.next();
 			if (object instanceof OrderedTree) {
 				OrderedTree tree = (OrderedTree) object;
