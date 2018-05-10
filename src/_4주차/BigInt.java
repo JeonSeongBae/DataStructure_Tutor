@@ -15,11 +15,11 @@ public class BigInt {
 		public int getDigit() {
 			return digit;
 		}
-
+/*
 		public void setDigit(int digit) {
 			this.digit = digit;
 		}
-
+*/
 		public Node getNext() {
 			return next;
 		}
