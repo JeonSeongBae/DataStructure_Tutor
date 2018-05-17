@@ -19,9 +19,9 @@ public class OrderedTree {
 		size = 1;
 	}
 
-	public OrderedTree(Object root, List<?> trees) {
+	public OrderedTree(Object root, List<OrderedTree> trees) {
 		this(root);
-		for (Iterator<?> it = trees.iterator(); it.hasNext();) {
+		for (Iterator<OrderedTree> it = trees.iterator(); it.hasNext();) {
 			Object object = it.next();
 			if (object instanceof OrderedTree) {
 				OrderedTree tree = (OrderedTree) object;
