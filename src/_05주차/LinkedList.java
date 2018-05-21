@@ -74,7 +74,7 @@ public class LinkedList {
 		if (start == null) {
 			throw new IllegalArgumentException("start == null");
 		}
-		
+
 		Node p = start;
 		start = start.getNext();
 		Node q = start.getNext();
