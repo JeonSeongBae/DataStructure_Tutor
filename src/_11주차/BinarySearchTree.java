@@ -45,7 +45,7 @@ public class BinarySearchTree implements BST {
 	@Override
 	public boolean recu_insert(Object key) {
 		if (this.key == null) {
-			this.key = (Node) key;
+			this.key = new Node(key);
 			this.size = 1;
 			return true;
 		}
@@ -80,29 +80,47 @@ public class BinarySearchTree implements BST {
 	@Override
 	public boolean iter_insert(Object key) {
 		if (this.key == null) {
-			this.key = (Node) key;
+			this.key = new Node(key);
 			this.size = 1;
 			return true;
 		}
-
 		BinarySearchTree temp = this;
+		boolean duplication = false;
 
 		while (temp != null) {
 			if (temp.key.compareTo(key) < 0) {
+				temp.size++;
 				if (temp.right == null) {
 					temp.right = new BinarySearchTree(key);
 					break;
 				}
 				temp = temp.right;
 			} else if (temp.key.compareTo(key) > 0) {
+				temp.size++;
 				if (temp.left == null) {
 					temp.left = new BinarySearchTree(key);
 					break;
 				}
-				temp = temp.right;
-			} else if (this.key.compareTo(key) == 0) {
-				return false;
+				temp = temp.left;
+			} else if (temp.key.compareTo(key) == 0) {
+				duplication = true;
+				temp = null;
 			}
+		}
+		temp = this;
+		if (duplication) {
+			while (temp != null) {
+				if (temp.key.compareTo(key) < 0) {
+					temp.size--;
+					temp = temp.right;
+				} else if (temp.key.compareTo(key) > 0) {
+					temp.size--;
+					temp = temp.right;
+				} else {
+					break;
+				}
+			}
+			return false;
 		}
 		return true;
 	}
