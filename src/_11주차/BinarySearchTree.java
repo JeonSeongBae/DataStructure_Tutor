@@ -58,6 +58,13 @@ public class BinarySearchTree implements BST {
 				this.left.recu_insert(key);
 			}
 		}
+		this.size = 1;
+		if (this.left != null) {
+			this.size += this.left.size;
+		}
+		if (this.right != null) {
+			this.size += this.right.size;
+		}
 		return true;
 	}
 

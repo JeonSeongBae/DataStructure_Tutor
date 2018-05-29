@@ -7,11 +7,6 @@ public class TestBinarySearchTree {
 		tree.recu_insert(5);
 		tree.recu_insert(10);
 
-		tree.recu_insert(10);
-
-		tree.recu_insert(10);
-
-		tree.recu_insert(10);
 		tree.recu_insert(1);
 		tree.recu_insert(3);
 		tree.recu_insert(7);
