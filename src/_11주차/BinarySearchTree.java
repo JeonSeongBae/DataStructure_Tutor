@@ -23,10 +23,12 @@ public class BinarySearchTree implements BST {
 				return 0;
 			}
 		}
-
 	}
 
 	public BinarySearchTree() {
+		this.key = null;
+		this.left = this.right = null;
+		this.size = 0;
 	}
 
 	public BinarySearchTree(Object key) {
@@ -42,9 +44,16 @@ public class BinarySearchTree implements BST {
 
 	@Override
 	public boolean recu_insert(Object key) {
+		if (this.key == null) {
+			this.key = (Node) key;
+			this.size = 1;
+			return true;
+		}
+
 		if (this.key.compareTo(key) == 0) {
 			return false;
 		}
+
 		if (this.key.compareTo(key) < 0) {
 			if (this.right == null) {
 				this.right = new BinarySearchTree(key);
@@ -70,7 +79,32 @@ public class BinarySearchTree implements BST {
 
 	@Override
 	public boolean iter_insert(Object key) {
-		return false;
+		if (this.key == null) {
+			this.key = (Node) key;
+			this.size = 1;
+			return true;
+		}
+
+		BinarySearchTree temp = this;
+
+		while (temp != null) {
+			if (temp.key.compareTo(key) < 0) {
+				if (temp.right == null) {
+					temp.right = new BinarySearchTree(key);
+					break;
+				}
+				temp = temp.right;
+			} else if (temp.key.compareTo(key) > 0) {
+				if (temp.left == null) {
+					temp.left = new BinarySearchTree(key);
+					break;
+				}
+				temp = temp.right;
+			} else if (this.key.compareTo(key) == 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
