@@ -1,7 +1,9 @@
 package _11주차;
 
+import java.util.Stack;
+
 public class BinarySearchTree implements BST {
-	private Comparable key;
+	private Comparable<Object> key;
 	private BinarySearchTree left, right; // left,right subtree
 	private int size;// 트리의 사이즈를 저장
 
@@ -49,18 +51,18 @@ public class BinarySearchTree implements BST {
 			this.size = 1;
 			return true;
 		}
-
-		if (this.key.compareTo(key) == 0) {
+		int result = this.key.compareTo(key);
+		if (result == 0) {
 			return false;
 		}
 
-		if (this.key.compareTo(key) < 0) {
+		if (result < 0) {
 			if (this.right == null) {
 				this.right = new BinarySearchTree(key);
 			} else {
 				this.right.recu_insert(key);
 			}
-		} else if (this.key.compareTo(key) > 0) {
+		} else if (result > 0) {
 			if (this.left == null) {
 				this.left = new BinarySearchTree(key);
 			} else {
@@ -85,8 +87,7 @@ public class BinarySearchTree implements BST {
 			return true;
 		}
 		BinarySearchTree temp = this;
-		boolean duplication = false;
-
+		Stack<BinarySearchTree> stack = new Stack<BinarySearchTree>();
 		while (temp != null) {
 			if (temp.key.compareTo(key) < 0) {
 				temp.size++;
@@ -94,6 +95,7 @@ public class BinarySearchTree implements BST {
 					temp.right = new BinarySearchTree(key);
 					break;
 				}
+				stack.push(temp);
 				temp = temp.right;
 			} else if (temp.key.compareTo(key) > 0) {
 				temp.size++;
@@ -101,26 +103,14 @@ public class BinarySearchTree implements BST {
 					temp.left = new BinarySearchTree(key);
 					break;
 				}
+				stack.push(temp);
 				temp = temp.left;
 			} else if (temp.key.compareTo(key) == 0) {
-				duplication = true;
-				temp = null;
-			}
-		}
-		temp = this;
-		if (duplication) {
-			while (temp != null) {
-				if (temp.key.compareTo(key) < 0) {
-					temp.size--;
-					temp = temp.right;
-				} else if (temp.key.compareTo(key) > 0) {
-					temp.size--;
-					temp = temp.right;
-				} else {
-					break;
+				while (!stack.isEmpty()) {
+					stack.pop().size--;
 				}
+				return false;
 			}
-			return false;
 		}
 		return true;
 	}
