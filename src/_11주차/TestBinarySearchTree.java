@@ -11,10 +11,11 @@ public class TestBinarySearchTree {
 		tree.recu_insert(7);
 		tree.inorder();
 		System.out.println("iter");
-		tree.iter_insert(13);
-		tree.iter_insert(11);
-		tree.iter_insert(15);
-		tree.iter_insert(12);
-		tree.inorder();
+		BinarySearchTree tree2 = new BinarySearchTree();
+		tree2.iter_insert(13);
+		tree2.iter_insert(11);
+		tree2.iter_insert(15);
+		tree2.iter_insert(12);
+		tree2.inorder();
 	}
 }
