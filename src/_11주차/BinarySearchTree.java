@@ -1,74 +1,70 @@
 package _11주차;
 
-import java.util.Stack;
+import java.util.*;
 
-public class BinarySearchTree implements BST {
-	private Comparable<Object> key;
+public class BinarySearchTree {
+	private Comparable<Integer> key;
 	private BinarySearchTree left, right; // left,right subtree
-	private int size;// 트리의 사이즈를 저장
+	private int size; // 트리의 사이즈를 저장
+
+	public BinarySearchTree() {
+		this.size = 0;
+	}
+
+	public BinarySearchTree(int key) {
+		this.key = new Node(key);
+		this.left = null;
+		this.right = null;
+		this.size = 1;
+	}
+
+	// 트리의 크기를 반환
+	public int treesize() {
+		return size;
+	}
 
 	private class Node implements Comparable {
 		int key;
 
-		public Node(Object key) {
-			this.key = (int) key;
+		public Node(int key) {
+			this.key = key;
 		}
 
 		@Override
-		public int compareTo(Object o) {
-			if (this.key < (int) o) {
-				return -1;
-			} else if (this.key > (int) o) {
+		public int compareTo(Object other) {
+			int others = (int) other;
+			if (key > others) {
 				return 1;
-			} else {
-				// this.key == (int) o
+			} else if (key < others) {
+				return -1;
+			} else
 				return 0;
-			}
 		}
 	}
 
-	public BinarySearchTree() {
-		this.key = null;
-		this.left = this.right = null;
-		this.size = 0;
-	}
-
-	public BinarySearchTree(Object key) {
-		this.key = new Node(key);
-		this.left = this.right = null;
-		this.size = 1;
-	}
-
-	@Override
-	public int treesize() {
-		return this.size;
-	}
-
-	@Override
-	public boolean recu_insert(Object key) {
+	// BST에 key를 값으로 하는 노드를 삽입하는 메소드를 재귀적으로 구현
+	public boolean recu_insert(int key) {
 		if (this.key == null) {
 			this.key = new Node(key);
 			this.size = 1;
 			return true;
 		}
-		int result = this.key.compareTo(key);
-		if (result == 0) {
+		if (this.key.compareTo(key) == 0) {
 			return false;
-		}
-
-		if (result < 0) {
-			if (this.right == null) {
-				this.right = new BinarySearchTree(key);
-			} else {
-				this.right.recu_insert(key);
-			}
-		} else if (result > 0) {
+		} else if (this.key.compareTo(key) > 0) {
 			if (this.left == null) {
 				this.left = new BinarySearchTree(key);
 			} else {
 				this.left.recu_insert(key);
 			}
+		} else if (this.key.compareTo(key) < 0) {
+			if (this.right == null) {
+				this.right = new BinarySearchTree(key);
+			} else {
+				this.right.recu_insert(key);
+			}
 		}
+		// size를 left subtree와 right subtree의 크기의 합으로 더해준다.
 		this.size = 1;
 		if (this.left != null) {
 			this.size += this.left.size;
@@ -79,44 +75,65 @@ public class BinarySearchTree implements BST {
 		return true;
 	}
 
-	@Override
-	public boolean iter_insert(Object key) {
+	// iteration을 사용한 insert 구현
+	public boolean iter_insert(int key) {
+		// defalut 생성자로 생성되어 key가 없을 경우
 		if (this.key == null) {
 			this.key = new Node(key);
 			this.size = 1;
 			return true;
 		}
-		BinarySearchTree temp = this;
+
+		BinarySearchTree bst = this;
+
+		// size 보정을 위한 Stack
 		Stack<BinarySearchTree> stack = new Stack<BinarySearchTree>();
-		while (temp != null) {
-			if (temp.key.compareTo(key) < 0) {
-				temp.size++;
-				if (temp.right == null) {
-					temp.right = new BinarySearchTree(key);
-					break;
-				}
-				stack.push(temp);
-				temp = temp.right;
-			} else if (temp.key.compareTo(key) > 0) {
-				temp.size++;
-				if (temp.left == null) {
-					temp.left = new BinarySearchTree(key);
-					break;
-				}
-				stack.push(temp);
-				temp = temp.left;
-			} else if (temp.key.compareTo(key) == 0) {
+
+		// 무한 루프와 동일, break or return으로 종료
+		while (bst != null) {
+			if (bst.key.compareTo(key) == 0) {
 				while (!stack.isEmpty()) {
-					stack.pop().size--;
+					BinarySearchTree temp = stack.pop();
+
+					// size를 left subtree와 right subtree의 크기의 합으로 더해준다.
+					temp.size = 1;
+					if (temp.left != null) {
+						temp.size += temp.left.size;
+					}
+					if (temp.right != null) {
+						temp.size += temp.right.size;
+					}
 				}
 				return false;
+			}
+
+			bst.size++;
+			stack.push(bst);
+			// 입력 key값이 더 클 경우 (right)
+			if (bst.key.compareTo(key) < 0) {
+				if (bst.right == null) {
+					bst.right = new BinarySearchTree(key);
+					break;
+				}
+				bst = bst.right;
+			}
+			// 입력 key값이 더 작을 경우 (left)
+			else if (bst.key.compareTo(key) > 0) {
+				if (bst.left == null) {
+					bst.left = new BinarySearchTree(key);
+					break;
+				}
+				bst = bst.left;
 			}
 		}
 		return true;
 	}
 
-	@Override
 	public void inorder() {
+		// 트리에 아무것도 존재하지 않을 경우
+		if (this.size == 0) {
+			return;
+		}
 		if (this.left != null) {
 			this.left.inorder();
 		}
