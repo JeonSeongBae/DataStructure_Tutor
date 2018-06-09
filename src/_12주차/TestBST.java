@@ -5,7 +5,7 @@ public class TestBST {
 
 	public static void main(String[] args) {
 		BinarySearchTree bst = new BinarySearchTree();
-		
+
 		bst.insert(5);
 		bst.insert(10);
 		bst.insert(1);
@@ -15,9 +15,9 @@ public class TestBST {
 		bst.insert(11);
 		bst.insert(15);
 		bst.insert(12);
-		
+
 		bst.inorder();
-		
+
 		System.out.println("===============================================");
 		bst.delete(1);
 		bst.delete(10);
@@ -28,7 +28,6 @@ public class TestBST {
 		bst.delete(13);
 		bst.delete(15);
 		bst.delete(3);
-		bst.inorder();
 	}
 
 }
