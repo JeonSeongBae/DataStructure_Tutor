@@ -1,9 +1,9 @@
-package _11주차;
+package _12주차_2;
 
 import java.util.*;
 
-public class BinarySearchTree {
-	private Comparable<Object> key;
+public class BinarySearchTree implements BST {
+	private Comparable<Integer> key;
 	private BinarySearchTree left, right; // left,right subtree
 	private int size; // 트리의 사이즈를 저장
 
@@ -23,7 +23,7 @@ public class BinarySearchTree {
 		return size;
 	}
 
-	private class Node implements Comparable<Object> {
+	private class Node implements Comparable {
 		int key;
 
 		public Node(int key) {
@@ -64,15 +64,27 @@ public class BinarySearchTree {
 				this.right.recu_insert(key);
 			}
 		}
+		resize();
+		return true;
+	}
+
+	public void resize() {
 		// size를 left subtree와 right subtree의 크기의 합으로 더해준다.
 		this.size = 1;
 		if (this.left != null) {
-			this.size += this.left.size;
+			// left의 키가 없을 경우 자식노드 삭제
+			if (this.left.key == null)
+				this.left = null;
+			else
+				this.size += this.left.size;
 		}
 		if (this.right != null) {
-			this.size += this.right.size;
+			// right의 키가 없을 경우 자식노드 삭제
+			if (this.right.key == null)
+				this.right = null;
+			else
+				this.size += this.right.size;
 		}
-		return true;
 	}
 
 	// iteration을 사용한 insert 구현
@@ -142,5 +154,24 @@ public class BinarySearchTree {
 		if (this.right != null) {
 			this.right.inorder();
 		}
+	}
+
+	public Node delete(int key) {
+		// 트리에 아무것도 존재하지 않을 경우
+		if (this.size == 0) {
+			return null;
+		}
+		// 자식이 없을 경우 자기 자신만 삭제
+		if (this.left == null && this.right == null) {
+			this.key = null;
+			resize();
+		}
+		return null;
+	}
+
+	@Override
+	public Comparable<Integer> deleteMinimum(_12주차.BinarySearchTree T) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
