@@ -3,7 +3,7 @@ package _12주차_2;
 import java.util.*;
 
 public class BinarySearchTree implements BST {
-	private Comparable<Integer> key;
+	private Comparable<Object> key;
 	private BinarySearchTree left, right; // left,right subtree
 	private int size; // 트리의 사이즈를 저장
 
@@ -23,7 +23,7 @@ public class BinarySearchTree implements BST {
 		return size;
 	}
 
-	private class Node implements Comparable {
+	private class Node implements Comparable<Object> {
 		int key;
 
 		public Node(int key) {
